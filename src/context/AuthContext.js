@@ -26,10 +26,10 @@ export const AuthContextProvider = ({children})=>{
         // used unsub to do it only once 
      const unsub =  projectAuth.onAuthStateChanged((user)=>{
             dispatch({type: 'AUTH_IS_READY', payload:user})
-            unsub()
+           // unsub()
         })
+        return () => unsub();
     },[])
-    console.log('AuthContext State: ', state)
     return(
         <AuthContext.Provider value={{...state, dispatch}}>
             {children}
